@@ -40,5 +40,29 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/reservations/{id}/notify', [ReservationController::class, 'notifyMember']);
 
 });
+// routes/api.php
+
+use App\Http\Controllers\GenreController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    // Genres
+    Route::get('/genres', [GenreController::class, 'index']);
+    Route::post('/genres', [GenreController::class, 'store']);
+    Route::get('/genres/{id}', [GenreController::class, 'show']);
+    Route::put('/genres/{id}', [GenreController::class, 'update']);
+    Route::delete('/genres/{id}', [GenreController::class, 'destroy']);
+});
+
+// routes/api.php
+
+use App\Http\Controllers\ReportController;
+
+Route::middleware('auth:sanctum')->group(function () {
+    // Reports
+    Route::get('/reports/issued-books', [ReportController::class, 'issuedBooksReport']);
+    Route::get('/reports/overdue-books', [ReportController::class, 'overdueBooksReport']);
+    Route::get('/reports/fines', [ReportController::class, 'finesReport']);
+});
+
 
 

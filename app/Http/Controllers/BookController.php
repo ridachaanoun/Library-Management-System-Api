@@ -27,12 +27,22 @@ class BookController extends Controller
     }
 
     // Get all books
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
+        $query = Book::query();
+        // Search by title, author, or genre
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $query->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('author', 'LIKE', "%{$search}%")
+            ->orWhere('genre', 'LIKE', "%{$search}%");
+        }
+             
+        // Pagination with 10 items per page
+        $books = $query->Paginate(10);
+
         return response()->json($books, 200);
     }
-
     // Get a single book
     public function show($id)
     {
