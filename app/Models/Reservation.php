@@ -1,22 +1,20 @@
 <?php
 
-// app/Models/Loan.php
+// app/Models/Reservation.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Loan extends Model
+class Reservation extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'book_id',
         'member_id',
-        'issued_date',
-        'due_date',
-        'returned_date',
-        'fine_amount'
+        'reserved_date',
+        'notification_sent'
     ];
 
     public function book()
